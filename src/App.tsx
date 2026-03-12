@@ -1,8 +1,26 @@
-// This component is just a placeholder.
-// Website-specific UIs can import and use the newsletter helpers from './newsletter'.
+import { Header } from './components/Header';
+import { Hero } from './components/Hero';
+import { About } from './components/About';
+import { Menu } from './components/Menu';
+import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
+import { siteData } from './data';
+
+const BUSINESS_ID = "2799c32e-b576-4a66-8534-13c413fe59cc";
 
 function App() {
-  return null
+  return (
+    <>
+      <Header businessName={siteData.business.name} />
+      <main>
+        <Hero heroData={siteData.hero} actions={siteData.actions} />
+        <About description={siteData.business.description} />
+        <Menu menuData={siteData.menu} />
+        <Contact contactData={siteData.contact} hoursData={siteData.hours} />
+      </main>
+      <Footer businessName={siteData.business.name} businessId={BUSINESS_ID} />
+    </>
+  )
 }
 
 export default App
