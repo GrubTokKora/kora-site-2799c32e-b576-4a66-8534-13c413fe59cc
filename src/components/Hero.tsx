@@ -55,7 +55,17 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.7) 100%)',
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.85) 100%)',
+        }}
+      />
+
+      {/* Center vignette for extra text contrast */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, transparent 70%)',
+          pointerEvents: 'none',
         }}
       />
 
@@ -92,31 +102,36 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
             alignItems: 'center',
             gap: '0.5rem',
             padding: '0.5rem 1.25rem',
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
+            background: 'rgba(255,255,255,0.15)',
+            backdropFilter: 'blur(12px)',
             borderRadius: '50px',
-            border: '1px solid rgba(255,255,255,0.15)',
+            border: '1px solid rgba(255,255,255,0.25)',
             fontSize: '0.85rem',
-            fontWeight: 500,
+            fontWeight: 600,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             marginBottom: '2rem',
+            textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5)',
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'translateY(0)' : 'translateY(20px)',
             transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
           }}
         >
-          <span style={{ color: 'var(--gold-light)' }}>★</span>
+          <span style={{ color: 'var(--gold-light)', filter: 'drop-shadow(0 0 4px rgba(200,169,110,0.6))' }}>★</span>
           Est. in Darien, CT
         </div>
 
         <h1
+          className="hero-title"
           style={{
             fontFamily: 'var(--font-family-serif)',
             fontWeight: 700,
             lineHeight: 1.1,
             marginBottom: '1.5rem',
             letterSpacing: '-0.02em',
+            color: '#ffffff',
+            textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 20px rgba(0,0,0,0.6), 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(255,255,255,0.1)',
+            WebkitTextStroke: '0.3px rgba(255,255,255,0.3)',
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'translateY(0)' : 'translateY(30px)',
             transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s',
@@ -127,12 +142,14 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
 
         <p
           style={{
-            fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-            lineHeight: 1.7,
+            fontSize: 'clamp(1.05rem, 2vw, 1.3rem)',
+            lineHeight: 1.8,
             marginBottom: '2.5rem',
-            color: 'rgba(255,255,255,0.85)',
+            color: '#ffffff',
             maxWidth: '600px',
             margin: '0 auto 2.5rem',
+            textShadow: '0 2px 10px rgba(0,0,0,0.8), 0 4px 25px rgba(0,0,0,0.5), 0 0 40px rgba(0,0,0,0.3)',
+            fontWeight: 400,
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'translateY(0)' : 'translateY(30px)',
             transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s',
@@ -192,6 +209,13 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
           0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
           40% { transform: translateX(-50%) translateY(-8px); }
           60% { transform: translateX(-50%) translateY(-4px); }
+        }
+        @keyframes heroGlow {
+          0%, 100% { text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 4px 20px rgba(0,0,0,0.6), 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(255,255,255,0.08); }
+          50% { text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 4px 20px rgba(0,0,0,0.6), 0 8px 40px rgba(0,0,0,0.4), 0 0 80px rgba(255,255,255,0.15), 0 0 120px rgba(200,169,110,0.1); }
+        }
+        .hero-title {
+          animation: heroGlow 4s ease-in-out infinite;
         }
       `}</style>
     </section>
