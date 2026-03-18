@@ -16,7 +16,7 @@ function App() {
         <Hero heroData={siteData.hero} actions={siteData.actions} />
         <About description={siteData.business.description} />
         <Menu menuData={siteData.menu} />
-        <Contact contactData={siteData.contact} hoursData={siteData.hours} />
+        <Contact contactData={siteData.contact} hoursData={siteData.hours} businessId={BUSINESS_ID} />
       </main>
       <Footer businessName={siteData.business.name} businessId={BUSINESS_ID} />
     </>
