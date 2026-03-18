@@ -1,6 +1,6 @@
 const API_BASE_URL_FALLBACK = 'https://kora-agent.quseappdev.com';
 // This is Google's v2 test key. The production site will have a real key injected.
-const RECAPTCHA_SITE_KEY_FALLBACK = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+const RECAPTCHA_SITE_KEY_FALLBACK = '6LfRt44sAAAAACVTvFvGjoufmEcZqZk_pT4T_5Xd';
 
 export function getApiBaseUrl(): string {
   if (typeof window !== 'undefined' && window.KORA_CONFIG?.apiBaseUrl) {
