@@ -114,7 +114,7 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
             textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5)',
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
+            transition: 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.2s',
           }}
         >
           <span style={{ color: 'var(--gold-light)', filter: 'drop-shadow(0 0 4px rgba(200,169,110,0.6))' }}>★</span>
@@ -134,7 +134,7 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
             WebkitTextStroke: '0.3px rgba(255,255,255,0.3)',
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s',
+            transition: 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.4s',
           }}
         >
           {heroData.title}
@@ -152,7 +152,7 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
             fontWeight: 400,
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s',
+            transition: 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.6s',
           }}
         >
           {heroData.subtitle}
@@ -166,7 +166,7 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
             flexWrap: 'wrap',
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s',
+            transition: 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.8s',
           }}
         >
           <a href={actions.primaryCtaUrl} className="btn btn-primary" style={{ padding: '1rem 2.5rem' }}>

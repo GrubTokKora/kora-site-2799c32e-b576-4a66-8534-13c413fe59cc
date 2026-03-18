@@ -20,9 +20,9 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
-  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-smooth: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-spring: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
@@ -161,8 +161,9 @@ a:hover { color: var(--accent-light); }
 /* Fade-in animation classes */
 .fade-in {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(20px);
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+  will-change: opacity, transform;
 }
 
 .fade-in.visible {
@@ -172,8 +173,9 @@ a:hover { color: var(--accent-light); }
 
 .fade-in-left {
   opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-30px);
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+  will-change: opacity, transform;
 }
 
 .fade-in-left.visible {
@@ -183,8 +185,9 @@ a:hover { color: var(--accent-light); }
 
 .fade-in-right {
   opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(30px);
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+  will-change: opacity, transform;
 }
 
 .fade-in-right.visible {
@@ -194,8 +197,9 @@ a:hover { color: var(--accent-light); }
 
 .scale-in {
   opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(0.95);
+  transition: opacity var(--transition-smooth), transform var(--transition-spring);
+  will-change: opacity, transform;
 }
 
 .scale-in.visible {
@@ -207,7 +211,8 @@ a:hover { color: var(--accent-light); }
 .stagger-children > * {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+  will-change: opacity, transform;
 }
 
 .stagger-children.visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }

@@ -30,7 +30,7 @@ export const Header: FC<{ businessName: string }> = ({ businessName }) => {
         background: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
         boxShadow: scrolled ? '0 1px 20px rgba(0,0,0,0.06)' : 'none',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)',
       }}
     >
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
