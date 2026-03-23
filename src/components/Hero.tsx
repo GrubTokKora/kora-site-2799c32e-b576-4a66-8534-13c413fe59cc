@@ -178,38 +178,7 @@ export const Hero: FC<HeroProps> = ({ heroData, actions }) => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '2rem',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.5rem',
-          opacity: loaded ? 0.6 : 0,
-          transition: 'opacity 1s ease 1.2s',
-          animation: 'bounce 2s infinite 2s',
-        }}
-      >
-        <span style={{ fontSize: '0.75rem', color: '#fff', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-          Scroll
-        </span>
-        <div style={{
-          width: '1px',
-          height: '40px',
-          background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)',
-        }} />
-      </div>
-
       <style>{`
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-          40% { transform: translateX(-50%) translateY(-8px); }
-          60% { transform: translateX(-50%) translateY(-4px); }
-        }
         @keyframes heroGlow {
           0%, 100% { text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 4px 20px rgba(0,0,0,0.6), 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(255,255,255,0.08); }
           50% { text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 4px 20px rgba(0,0,0,0.6), 0 8px 40px rgba(0,0,0,0.4), 0 0 80px rgba(255,255,255,0.15), 0 0 120px rgba(200,169,110,0.1); }
