@@ -1,4 +1,4 @@
-import { getApiBaseUrlsf } from './config';
+import { getApiBaseUrl } from './config';
 
 export interface ContactFormData {
   name: string;
