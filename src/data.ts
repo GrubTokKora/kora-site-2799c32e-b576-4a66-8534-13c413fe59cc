@@ -17,7 +17,7 @@ export const siteData: SiteData = {
     "Sunday": "12:00 PM - 9:00 PM"
   },
   hero: {
-    title: "Authentic Italian Pizza & Pasta",
+    title: "Heights Pizza Company",
     subtitle: "Fresh ingredients, classic recipes. Taste the tradition at Heights Pizza Company.",
     backgroundImage: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop"
   },
