@@ -301,3 +301,147 @@ a:hover { color: var(--accent-light); }
   color: #c62828;
   border: 1px solid #f5c2c7;
 }
+
+/* Voice Agent Widget */
+.voice-agent-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-fast);
+  z-index: 1001;
+}
+
+.voice-agent-fab:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.voice-agent-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.voice-agent-modal {
+  width: 90%;
+  max-width: 400px;
+  height: 600px;
+  background: var(--background-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95);
+  animation: scaleIn 0.3s 0.1s forwards;
+}
+
+.voice-agent-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.voice-agent-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.voice-agent-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: 0.5rem;
+  line-height: 1;
+}
+
+.voice-agent-transcript {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.voice-agent-transcript .transcript-entry {
+  margin-bottom: 1rem;
+}
+
+.voice-agent-transcript .transcript-entry.agent {
+  color: var(--text-color);
+}
+
+.voice-agent-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+.status-indicator {
+  font-weight: 500;
+  position: relative;
+  padding-left: 18px;
+}
+
+.status-indicator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.status-indicator.connecting::before {
+  background-color: #f59e0b; /* amber-500 */
+}
+
+.status-indicator.active::before {
+  background-color: #22c55e; /* green-500 */
+  animation: pulse 2s infinite;
+}
+
+.status-indicator.error::before {
+  background-color: #ef4444; /* red-500 */
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

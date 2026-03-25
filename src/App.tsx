@@ -4,6 +4,7 @@ import { About } from './components/About';
 import { Menu } from './components/Menu';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { VoiceAgentWidget } from './components/VoiceAgentWidget';
 import { siteData } from './data';
 
 const BUSINESS_ID = "2799c32e-b576-4a66-8534-13c413fe59cc";
@@ -19,6 +20,7 @@ function App() {
         <Contact contactData={siteData.contact} hoursData={siteData.hours} businessId={BUSINESS_ID} />
       </main>
       <Footer businessName={siteData.business.name} businessId={BUSINESS_ID} />
+      <VoiceAgentWidget businessId={BUSINESS_ID} />
     </>
   )
 }
