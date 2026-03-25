@@ -20,6 +20,7 @@ declare global {
       features?: {
         voice?: {
           enabled?: boolean
+          provider?: string
         }
       }
       // Other runtime configuration fields may be added by the backend.
