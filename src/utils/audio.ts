@@ -33,3 +33,26 @@ export function base64ToArrayBuffer(base64: string): ArrayBuffer {
   }
   return bytes.buffer;
 }
+
+/**
+ * Decodes a base64 string into a 16-bit PCM Int16Array.
+ * @param base64 The base64 string to decode.
+ * @returns The decoded Int16Array.
+ */
+export function pcm16Int16ArrayFromBase64(base64: string): Int16Array {
+  const buffer = base64ToArrayBuffer(base64);
+  return new Int16Array(buffer);
+}
+
+/**
+ * Converts a 16-bit PCM Int16Array to a Float32Array.
+ * @param pcm16 The Int16Array to convert.
+ * @returns The converted Float32Array.
+ */
+export function pcm16ToFloat32Array(pcm16: Int16Array): Float32Array {
+  const out = new Float32Array(pcm16.length);
+  for (let i = 0; i < pcm16.length; i++) {
+    out[i] = pcm16[i] / 32768.0;
+  }
+  return out;
+}
