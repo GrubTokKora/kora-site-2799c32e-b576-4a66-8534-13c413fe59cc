@@ -302,3 +302,240 @@ a:hover { color: var(--accent-light); }
   border: 1px solid #f5c2c7;
 }
 
+/* Voice Agent Widget */
+.voice-widget-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background-color: var(--accent-color);
+  color: white;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.voice-widget-fab:hover {
+  background-color: var(--accent-dark);
+  transform: scale(1.1);
+}
+
+.voice-widget-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.voice-widget-modal {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1c1c1c;
+  border: 1px solid #44403c;
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+@media (min-width: 768px) {
+  .voice-widget-modal {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 400px;
+    max-height: 70vh;
+    height: auto;
+    border-radius: 1rem;
+  }
+}
+
+.voice-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #44403c;
+  flex-shrink: 0;
+}
+
+.voice-widget-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.voice-widget-header-title h2 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: white;
+  text-align: left;
+  margin: 0;
+}
+
+.voice-widget-header-title .icon {
+  color: var(--accent-light);
+}
+
+.voice-widget-close-btn {
+  padding: 0.5rem;
+  color: #a8a29e;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.voice-widget-close-btn:hover {
+  color: white;
+  background-color: #44403c;
+}
+
+.voice-widget-body {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.voice-widget-message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.voice-widget-message-row.user {
+  justify-content: flex-end;
+}
+
+.voice-widget-message-row.agent {
+  justify-content: flex-start;
+}
+
+.voice-widget-message-bubble {
+  max-width: 80%;
+  padding: 0.75rem;
+  border-radius: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.voice-widget-message-bubble.user {
+  background-color: var(--accent-color);
+  color: white;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.voice-widget-message-bubble.agent {
+  background-color: #292524;
+  color: #e7e5e4;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.voice-widget-agent-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background-color: rgba(220, 38, 38, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.voice-widget-agent-avatar .icon {
+  color: var(--accent-light);
+}
+
+.voice-widget-footer {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #44403c;
+  flex-shrink: 0;
+}
+
+.voice-widget-mic-btn {
+  background-color: var(--accent-color);
+  color: white;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.voice-widget-mic-btn:disabled {
+  background-color: #44403c;
+  cursor: not-allowed;
+}
+
+.voice-widget-footer-status {
+  font-size: 0.75rem;
+  color: #78716c;
+  margin-top: 0.75rem;
+}
+
+.voice-widget-error-msg {
+  padding: 0.75rem;
+  background-color: rgba(153, 27, 27, 0.5);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #fecaca;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@media (min-width: 768px) {
+  @keyframes slideInUp {
+    from { transform: translateY(30px) scale(0.95); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+}
+
