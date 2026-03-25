@@ -17,6 +17,11 @@ declare global {
     KORA_CONFIG?: {
       apiBaseUrl?: string
       recaptchaSiteKey?: string
+      features?: {
+        voice?: {
+          enabled?: boolean
+        }
+      }
       // Other runtime configuration fields may be added by the backend.
       // This object is intended for environment-specific, non-secret public config.
     }
