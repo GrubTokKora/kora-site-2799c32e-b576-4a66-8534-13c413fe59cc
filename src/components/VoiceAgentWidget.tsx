@@ -2,11 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { Mic, Bot, X, Loader } from 'lucide-react';
 import { createVoiceSession } from '../voice';
-import {
-  base64FromInt16LE,
-  int16FromBase64PCM16,
-  float32FromPCM16,
-} from '../utils/audio';
+import type { VoiceSessionBootstrap } from '../voice';
+import { base64FromInt16LE, int16FromBase64PCM16, float32FromPCM16 } from '../utils/audio';
 
 type Sender = 'user' | 'agent';
 type Message = { sender: Sender; text: string };
@@ -22,22 +19,11 @@ function isVoiceFeatureEnabled(): boolean {
   );
 }
 
-declare global {
-  interface Window {
-    KORA_CONFIG?: {
-      apiBaseUrl?: string;
-      recaptchaSiteKey?: string;
-      features?: {
-        voice?: {
-          enabled?: boolean;
-          provider?: string;
-        };
-      };
-    };
-  }
+interface VoiceAgentWidgetProps {
+  businessId: string;
 }
 
-export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => {
+const VoiceAgentWidget: FC<VoiceAgentWidgetProps> = ({ businessId }) => {
   const visible = useMemo(() => isVoiceFeatureEnabled(), []);
 
   const [status, setStatus] = useState<WidgetStatus>('idle');
@@ -58,13 +44,13 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
   const locale = useMemo(() => (typeof navigator !== 'undefined' ? navigator.language : 'en-US'), []);
 
   function stop() {
-    wsRef.current?.close();
+    try { wsRef.current?.close(); } catch {}
     wsRef.current = null;
-    processorRef.current?.disconnect();
+    try { processorRef.current?.disconnect(); } catch {}
     processorRef.current = null;
-    micStreamRef.current?.getTracks().forEach((t) => t.stop());
+    try { micStreamRef.current?.getTracks().forEach((t) => t.stop()); } catch {}
     micStreamRef.current = null;
-    audioCtxRef.current?.close();
+    try { audioCtxRef.current?.close(); } catch {}
     audioCtxRef.current = null;
 
     isSessionReadyRef.current = false;
@@ -95,7 +81,7 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
       const bootstrap = await createVoiceSession(businessId, locale, {
         url: window.location.href,
         title: document.title,
-      });
+      }) as VoiceSessionBootstrap;
 
       const websocketUrl = bootstrap.websocket_url;
       const clientSecret = bootstrap.client_secret;
@@ -119,7 +105,7 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
           const event = JSON.parse(ev.data);
           handleRealtimeEvent(event);
         } catch {
-          // Ignore
+          // Ignore unknown event shapes
         }
       };
 
@@ -129,7 +115,13 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
       };
 
       ws.onclose = () => {
-        stop();
+        try { processorRef.current?.disconnect(); } catch {}
+        try { micStreamRef.current?.getTracks().forEach((t) => t.stop()); } catch {}
+        try { audioCtxRef.current?.close(); } catch {}
+        wsRef.current = null;
+        isSessionReadyRef.current = false;
+        pendingAudioRef.current = [];
+        assistantDraftRef.current = '';
         setStatus((s) => (s === 'error' ? s : 'idle'));
       };
     } catch (e) {
@@ -204,13 +196,13 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
       isSessionReadyRef.current = true;
       setStatus('connected');
       const ws = wsRef.current;
-      if (ws?.readyState === WebSocket.OPEN) {
+      if (ws && ws.readyState === WebSocket.OPEN) {
         for (const b64 of pendingAudioRef.current) {
           ws.send(JSON.stringify({ type: 'input_audio_buffer.append', audio: b64 }));
         }
         pendingAudioRef.current = [];
-        void startMicAndStream(ws);
       }
+      void startMicAndStream(wsRef.current as WebSocket);
       return;
     }
 
@@ -233,7 +225,8 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
     }
 
     if (event.type === 'response.output_audio_transcript.delta') {
-      if (typeof event.delta === 'string') assistantDraftRef.current += event.delta;
+      const d = event.delta;
+      if (typeof d === 'string') assistantDraftRef.current += d;
       return;
     }
 
@@ -245,10 +238,12 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
     }
 
     if (event.type === 'input_audio_buffer.speech_stopped') {
-      const ws = wsRef.current;
-      if (ws?.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({ type: 'response.create', response: { modalities: ['text', 'audio'] } }));
-      }
+      try {
+        const ws = wsRef.current;
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: 'response.create', response: { modalities: ['text', 'audio'] } }));
+        }
+      } catch {}
       return;
     }
 
@@ -260,7 +255,9 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
   }
 
   useEffect(() => {
-    return () => stop();
+    return () => {
+      stop();
+    };
   }, []);
 
   if (!visible) return null;
@@ -314,21 +311,21 @@ export const VoiceAgentWidget: FC<{ businessId: string }> = ({ businessId }) => 
             <div className="voice-widget-body">
               {messages.map((m, idx) => (
                 <div key={idx} className={`voice-widget-message-row ${m.sender}`}>
-                  {m.sender === 'agent' && (
+                  {m.sender === 'agent' ? (
                     <div className="voice-widget-agent-avatar">
                       <Bot className="icon" style={{ width: '1.25rem', height: '1.25rem' }} />
                     </div>
-                  )}
+                  ) : null}
                   <div className={`voice-widget-message-bubble ${m.sender}`}>
                     <p>{m.text}</p>
                   </div>
                 </div>
               ))}
 
-              {status === 'loading' && <div style={{ textAlign: 'center', color: '#a8a29e', fontSize: '0.875rem' }}>Connecting...</div>}
-              {status === 'error' && errorText && (
+              {status === 'loading' ? <div style={{ textAlign: 'center', color: '#a8a29e', fontSize: '0.875rem' }}>Connecting...</div> : null}
+              {status === 'error' && errorText ? (
                 <div className="voice-widget-error-msg">{errorText}</div>
-              )}
+              ) : null}
             </div>
 
             <footer className="voice-widget-footer">
