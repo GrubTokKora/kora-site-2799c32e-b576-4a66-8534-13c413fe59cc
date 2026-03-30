@@ -23,25 +23,33 @@ export const siteData: SiteData = {
   },
   menu: [
     {
-      "category": "Pizzas",
+      "category": "MAIN COURSE",
       "items": [
-        { "name": "Margherita", "description": "Fresh mozzarella, San Marzano tomatoes, basil, and extra virgin olive oil.", "price": "$14.00" },
-        { "name": "Pepperoni", "description": "Classic pepperoni pizza with a zesty tomato sauce and mozzarella cheese.", "price": "$16.00" },
-        { "name": "Veggie Supreme", "description": "Bell peppers, onions, mushrooms, olives, and fresh tomatoes.", "price": "$17.00" }
+        { "name": "Cheeseburger", "description": "", "price": "$34" },
+        { "name": "Cheese Sandwich", "description": "", "price": "$22" },
+        { "name": "Chicken Burgers", "description": "", "price": "$24" },
+        { "name": "Spicy Chicken", "description": "", "price": "$33" },
+        { "name": "Hot Dog", "description": "", "price": "$23" }
       ]
     },
     {
-      "category": "Pastas",
+      "category": "APPETIZERS",
       "items": [
-        { "name": "Spaghetti Carbonara", "description": "Pasta with eggs, cheese, pancetta, and black pepper.", "price": "$18.00" },
-        { "name": "Fettuccine Alfredo", "description": "Creamy Alfredo sauce with fettuccine pasta.", "price": "$17.00" }
+        { "name": "Fruit Salad", "description": "", "price": "$13" },
+        { "name": "Cocktails", "description": "", "price": "$12" },
+        { "name": "Nuggets", "description": "", "price": "$14" },
+        { "name": "Sandwich", "description": "", "price": "$13" },
+        { "name": "French Fries", "description": "", "price": "$15" }
       ]
     },
     {
-      "category": "Sandwiches",
+      "category": "BEVERAGE",
       "items": [
-        { "name": "Italian Combo", "description": "Ham, salami, provolone, lettuce, tomato, and Italian dressing.", "price": "$12.00" },
-        { "name": "Meatball Parmigiana", "description": "Homemade meatballs, marinara sauce, and melted mozzarella.", "price": "$13.00" }
+        { "name": "Milk Shake", "description": "", "price": "$34" },
+        { "name": "Iced Tea", "description": "", "price": "$22" },
+        { "name": "Orange Juice", "description": "", "price": "$24" },
+        { "name": "Lemon Tea", "description": "", "price": "$33" },
+        { "name": "Iced Coffee", "description": "", "price": "$23" }
       ]
     }
   ],
