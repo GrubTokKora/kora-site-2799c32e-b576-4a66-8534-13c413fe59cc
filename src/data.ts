@@ -25,7 +25,7 @@ export const siteData: SiteData = {
     {
       "category": "MAIN COURSE",
       "items": [
-        { "name": "Cheeseburger", "description": "", "price": "$34" },
+        { "name": "Cheeseburger", "description": "", "price": "$35" },
         { "name": "Cheese Sandwich", "description": "", "price": "$22" },
         { "name": "Chicken Burgers", "description": "", "price": "$24" },
         { "name": "Spicy Chicken", "description": "", "price": "$33" },
@@ -45,7 +45,7 @@ export const siteData: SiteData = {
     {
       "category": "BEVERAGE",
       "items": [
-        { "name": "Milk Shake", "description": "", "price": "$34" },
+        { "name": "Milk Shake", "description": "", "price": "$35" },
         { "name": "Iced Tea", "description": "", "price": "$22" },
         { "name": "Orange Juice", "description": "", "price": "$24" },
         { "name": "Lemon Tea", "description": "", "price": "$33" },
